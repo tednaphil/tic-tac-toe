@@ -2,17 +2,16 @@
     <head>
         <title>Tic-Tac-Toe 🍯</title>
         <link rel="stylesheet" href="styles.css">
-        <script src="main.js"></script>
     </head>
     <body>
         <section class="player-display" id="player-1">
             <h2 class="player-icons" id="player-1-icon">🐝</h2>
-            <h2 class="text" id="player-1-wins">Player 1 Display</h2>
+            <h2 class="text" id="player-one-wins">Player 1 Display</h2>
         </section>
         <main class="game-display">
-            <h1 class="text" id="announcment">Game Display</h1>
+            <h1 class="text" id="announcement">Game Display</h1>
             <article class="game-board">
-                <div class="grid-item" id="position-0">0</div>
+                <div class="grid-item" data-value="0" id="position-0">0</div>
                 <div class="grid-item" id="position-1">1</div>
                 <div class="grid-item" id="position-2">2</div>
                 <div class="grid-item" id="position-3">3</div>
@@ -25,7 +24,8 @@
         </main>
         <section class="player-display" id="player-2">
             <h2 class="player-icons" id="player-2-icon">🐻</h2>
-            <h2 class="text" id="player-2-wins">Player 2 Display</h2>
+            <h2 class="text" id="player-two-wins">Player 2 Display</h2>
         </section>
     </body>
+    <script src="main.js"></script>
 </html>
