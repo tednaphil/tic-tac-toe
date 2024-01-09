@@ -8,10 +8,15 @@ body {
 
 .player-display {
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    align-items: center;
 }
 
-article {
+.player-icons {
+    font-size: xxx-large;
+}
+
+.game-display {
     background-color: #faf7de;
     width: 50%;
     display: flex;
