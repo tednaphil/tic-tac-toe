@@ -29,6 +29,7 @@ addEventListener('load', loadGame);
 gameBoard.addEventListener('click',function(event) {
     if(event.target.classList.contains('grid-item')) {
         updateGameboard(event)
+        displayMoves()
         switchTurns()
         checkBoard()
         increaseWins()
@@ -114,14 +115,26 @@ function updateGameboard(e) {
     if (players[1].isTurn) {
         gameBoardMoves.playerTwoMoves.push(e.srcElement.attributes[1].nodeValue)
     }
+    gameBoardMoves.playerOneMoves.sort()
+    gameBoardMoves.playerTwoMoves.sort()
+    console.log(`player two sorted moves`, gameBoardMoves.playerTwoMoves)
     // console.log('gameboardMoves', gameBoardMoves)
     //if player.isTurn change the target's inner text to that players token
 }
 
 // Display gameboard data:
-// function displayMoves() {
-
-// }
+function displayMoves() {
+    var playerOneMoves = gameBoardMoves.playerOneMoves;
+    var playerTwoMoves = gameBoardMoves.playerTwoMoves;
+    for (var i = 0; i < playerOneMoves.length; i++) {
+        boardSpaces[playerOneMoves[i]].innerText = `${players[0].token}`
+        console.log(boardSpaces[playerOneMoves[i]])
+    }
+    for (var i = 0; i < playerTwoMoves.length; i++) {
+        boardSpaces[playerTwoMoves[i]].innerText = `${players[1].token}`
+        console.log(boardSpaces[playerTwoMoves[i]])
+    }
+}
 
 function makeAnnouncement() {
 // update the announcement element's innerText to display whose turn it is
