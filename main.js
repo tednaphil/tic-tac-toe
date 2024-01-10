@@ -198,14 +198,18 @@ function resetGame() {
         playerTwoMoves: []
     };
     // switch game starter
+    console.log('started this game', startedGame)
     if (startedGame === 'playerOne') {
         startedGame = 'playerTwo'
         players[1].isTurn = true
+        players[0].isTurn = false
         }
-    if (startedGame === 'playerTwo') {
+    else if (startedGame === 'playerTwo') {
         startedGame = 'playerOne'
         players[0].isTurn = true
+        players[1].isTurn = false
     }
-console.log(startedGame)
-    console.log(gameBoardMoves)
+console.log('starting next game', startedGame)
+console.log('should be false', players[0].isTurn)
+console.log(gameBoardMoves)
 }
