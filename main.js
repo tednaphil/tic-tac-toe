@@ -108,18 +108,19 @@ function increaseWins() {
 function updateGameboard(e) {
     // console.log(`updateGameboard`)
     // console.log(e.srcElement.attributes[1].nodeValue)
-    // only allow a boardSpace to be added once
-    if (players[0].isTurn) {
-        gameBoardMoves.playerOneMoves.push(e.srcElement.attributes[1].nodeValue)
+    var space = e.srcElement.attributes[1].nodeValue
+    if (players[0].isTurn && !gameBoardMoves.playerOneMoves.includes(space)) {
+        gameBoardMoves.playerOneMoves.push(space);
+        // switchTurns();
     }
-    if (players[1].isTurn) {
-        gameBoardMoves.playerTwoMoves.push(e.srcElement.attributes[1].nodeValue)
+    if (players[1].isTurn && !gameBoardMoves.playerTwoMoves.includes(space)) {
+        gameBoardMoves.playerTwoMoves.push(space);
+        // switchTurns();
     }
     gameBoardMoves.playerOneMoves.sort()
     gameBoardMoves.playerTwoMoves.sort()
     console.log(`player two sorted moves`, gameBoardMoves.playerTwoMoves)
     // console.log('gameboardMoves', gameBoardMoves)
-    //if player.isTurn change the target's inner text to that players token
 }
 
 // Display gameboard data:
@@ -137,9 +138,6 @@ function displayMoves() {
 }
 
 function announceTurn() {
-// update the announcement element's innerText to display whose turn it is
-// if someone has won, announce the winner, then timeout and display whose turn it is
-// if there is draw, announce there's a draw, then timeout and display whose turn it is  
     if (players[0].isTurn) {
         announcement.innerText = `It's ${players[0].token}'s turn`
     }
