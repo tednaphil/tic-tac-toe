@@ -31,9 +31,9 @@ gameBoard.addEventListener('click',function(event) {
         updateGameboard(event)
         displayMoves()
         switchTurns()
+        announceTurn()
         checkBoard()
         increaseWins()
-        announceTurn()
      }
 })
 
@@ -84,19 +84,22 @@ function increaseWins() {
         players[0].wins ++
         console.log('win for player one')
         console.log(players[0].wins)
-        // announceWinner(players[0])
-        resetGame()
+        announceWinner(players[0])
+        setTimeout(resetGame(), 4000)
+        // resetGame()
     }
     if (checkBoard() === 'playerTwo') {
         players[1].wins ++
         console.log('win for player two')
         console.log(players[1].wins)
-        // announceWinner(players[1])
-        resetGame()
+        announceWinner(players[1])
+        setTimeout(resetGame(), 4000)
+        // resetGame()
     } else if (checkBoard() === null) {
         console.log('twas a draw')
-        // announceWinner()
-        resetGame()
+        announceWinner('draw')
+        setTimeout(resetGame(), 4000)
+        // resetGame()
     }
     displayWins()
 }
@@ -145,17 +148,17 @@ function announceTurn() {
     }   
 }
 
-// function announceWinner(playerObject) {
-//     console.log(`announceWinner`)
-//     console.log(playerObject.token)
-//     if (checkBoard()) {
-//         announcement.innerText = `${playerObject.token} won the honey!`
-//         console.log('winner announcement')
-//     } else {
-//         announcement.innerText = `It's a draw!`
-//         console.log('draw announcement')
-//     }
-// }
+function announceWinner(playerObject) {
+    console.log(`announceWinner`)
+    console.log(playerObject.token)
+    if (checkBoard()) {
+        announcement.innerText = `${playerObject.token} won the honey!`
+        console.log('winner announcement')
+    } else if (checkBoard() === null) {
+        announcement.innerText = `It's a draw!`
+        console.log('draw announcement')
+    }
+}
 
 // Keep track of which player's turn it is:
 function switchTurns() {
@@ -226,6 +229,7 @@ function resetGame() {
     };
     turns = 0;
     clearBoard();
+    // announceTurn();
 console.log('starting next game', startedGame)
 console.log(gameBoardMoves)
 }
