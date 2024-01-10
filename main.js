@@ -85,7 +85,7 @@ function increaseWins() {
         console.log('win for player one')
         console.log(players[0].wins)
         announceWinner(players[0])
-        setTimeout(resetGame(), 4000)
+        setTimeout(resetGame, 2500)
         // resetGame()
     }
     if (checkBoard() === 'playerTwo') {
@@ -93,12 +93,12 @@ function increaseWins() {
         console.log('win for player two')
         console.log(players[1].wins)
         announceWinner(players[1])
-        setTimeout(resetGame(), 4000)
+        setTimeout(resetGame, 2500)
         // resetGame()
     } else if (checkBoard() === null) {
         console.log('twas a draw')
         announceWinner('draw')
-        setTimeout(resetGame(), 4000)
+        setTimeout(resetGame, 2500)
         // resetGame()
     }
     displayWins()
@@ -229,7 +229,7 @@ function resetGame() {
     };
     turns = 0;
     clearBoard();
-    // announceTurn();
+    announceTurn();
 console.log('starting next game', startedGame)
 console.log(gameBoardMoves)
 }
