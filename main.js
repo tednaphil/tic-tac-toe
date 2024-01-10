@@ -17,20 +17,11 @@ var boardSpaces = {
 
 // GLOBAL VARIABLES
 var players = [];
-var winningConditions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-];
 var gameBoardMoves = {
     playerOneMoves: [],
     playerTwoMoves: []
 };
+var startedGame = 'playerOne'
 var turns = 0
 
 // EVENT LISTENERS
@@ -39,7 +30,7 @@ gameBoard.addEventListener('click',function(event) {
     if(event.target.classList.contains('grid-item')) {
         updateGameboard(event)
         // switchTurns()
-        // checkBoard()
+        checkBoard()
      }
 })
 
@@ -91,6 +82,7 @@ function loadGame() {
 // Increase Wins
 // if checkBoard() is playerOne, players[0].wins ++
 // if checkBoard() is playerTwo, players[1].wins ++
+// if !checkBoard(), do nothing
 
 // Keep track of gameboard data
 function updateGameboard(e) {
@@ -115,8 +107,6 @@ function updateGameboard(e) {
 // Keep track of which player's turn it is:
 function switchTurns() {
     // turns ++
-    // Q: how will I keep track of who started the last round?
-
     //check the player object to see if it's their turn
     //if it is the players turn, reassign isTurn to false
     //and assign the other players turn to true
@@ -133,13 +123,57 @@ function checkBoard() {
 // if turns = 9 and neither array includes a winning condition, determine a draw
 // and winner assigned to null
 // return winner
+    // console.log('checkBoard')
+    var winningConditions = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+    var winner = ''
+    for (var i = 0; i < winningConditions.length; i++) {
+        // console.log('checkBoard for loop')
+        // console.log('gameboard moves player One', gameBoardMoves.playerOneMoves.toString())
+        // console.log('winning condition 0', winningConditions[0].toString())
+        // console.log(gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i]))
+        if (gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i])) {
+            winner = 'playerOne'
+            console.log('player one wins')
+        } else if (gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i])) {
+            winner = 'playerTwo'
+            console.log('player two wins')
+        } else if (turns === 9) {
+            winner = null
+            console.log('a draw')
+        } else {
+            winner = null
+            console.log('no winner')
+        }
+        return winner
+    }
 }
 
 
-
 // Reset gameboard and start new game
-function endGame() {
+function resetGame() {
 // reset gameBoardMoves
+    gameBoardMoves = {
+        playerOneMoves: [],
+        playerTwoMoves: []
+    };
+    // switch game starter
+    if (startedGame === 'playerOne') {
+        startedGame = 'playerTwo'
+        players[1].isTurn = true
+        }
+    if (startedGame === 'playerTwo') {
+        startedGame = 'playerOne'
+        players[0].isTurn = true
+    }
 }
 
 
