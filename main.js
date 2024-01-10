@@ -90,12 +90,15 @@ function increaseWins() {
         players[0].wins ++
         console.log('win for player one')
         console.log(players[0].wins)
+        resetGame()
     }
     if (checkBoard() === 'playerTwo') {
         players[1].wins ++
         console.log('win for player two')
         console.log(players[1].wins)
+        resetGame()
     }
+    displayWins()
 }
 
 // Keep track of gameboard data
@@ -187,7 +190,7 @@ function checkBoard() {
 }
 
 
-// Reset gameboard and start new game
+// Reset gameboard and start new game:
 function resetGame() {
 // reset gameBoardMoves
     gameBoardMoves = {
@@ -203,4 +206,6 @@ function resetGame() {
         startedGame = 'playerOne'
         players[0].isTurn = true
     }
+console.log(startedGame)
+    console.log(gameBoardMoves)
 }
