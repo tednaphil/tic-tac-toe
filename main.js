@@ -65,15 +65,9 @@ function displayWins() {
 };
 
 function clearBoard() {
-    boardSpaces[0].innerText = '';
-    boardSpaces[1].innerText = '';
-    boardSpaces[2].innerText = '';
-    boardSpaces[3].innerText = '';
-    boardSpaces[4].innerText = '';
-    boardSpaces[5].innerText = '';
-    boardSpaces[6].innerText = '';
-    boardSpaces[7].innerText = '';
-    boardSpaces[8].innerText = '';
+    for (var i = 0; i < 9; i++) {
+        boardSpaces[i].innerText = ''
+    }
 };
 
 function loadGame() {
@@ -81,7 +75,7 @@ function loadGame() {
     displayWins();
     clearBoard();
     announceTurn();
-}
+};
 
 // Increase Wins:
 function increaseWins() {
