@@ -31,6 +31,7 @@ gameBoard.addEventListener('click',function(event) {
         updateGameboard(event)
         switchTurns()
         checkBoard()
+        increaseWins()
      }
 })
 
@@ -83,13 +84,31 @@ function loadGame() {
 // if checkBoard() is playerOne, players[0].wins ++
 // if checkBoard() is playerTwo, players[1].wins ++
 // if !checkBoard(), do nothing
+function increaseWins() {
+    // console.log('increase wins winner:', checkBoard())
+    if (checkBoard() === 'playerOne') {
+        players[0].wins ++
+        console.log('win for player one')
+        console.log(players[0].wins)
+    }
+    if (checkBoard() === 'playerTwo') {
+        players[1].wins ++
+        console.log('win for player two')
+        console.log(players[1].wins)
+    }
+}
 
 // Keep track of gameboard data
 function updateGameboard(e) {
-    console.log(`updateGameboard`)
+    // console.log(`updateGameboard`)
     // console.log(e.srcElement.attributes[1].nodeValue)
-    gameBoardMoves.playerOneMoves.push(e.srcElement.attributes[1].nodeValue)
-    console.log('gameboardMoves', gameBoardMoves)
+    if (players[0].isTurn) {
+        gameBoardMoves.playerOneMoves.push(e.srcElement.attributes[1].nodeValue)
+    }
+    if (players[1].isTurn) {
+        gameBoardMoves.playerTwoMoves.push(e.srcElement.attributes[1].nodeValue)
+    }
+    // console.log('gameboardMoves', gameBoardMoves)
     //if player.isTurn change the target's inner text to that players token
 }
 
@@ -147,21 +166,24 @@ function checkBoard() {
         // console.log('gameboard moves player One', gameBoardMoves.playerOneMoves.toString())
         // console.log('winning condition 0', winningConditions[0].toString())
         // console.log(gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i]))
+        // console.log(gameBoardMoves.playerOneMoves.includes(winningConditions[i]))
+        // console.log(winningConditions[3])
+        // console.log('player one moves', gameBoardMoves.playerOneMoves.toString())
         if (gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i])) {
             winner = 'playerOne'
             console.log('player one wins')
         } else if (gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i])) {
             winner = 'playerTwo'
             console.log('player two wins')
-        } else if (turns === 9) {
-            winner = null
-            console.log('a draw')
-        } else {
-            winner = null
-            console.log('no winner')
+        // } else if (turns === 9) {
+        //     winner = null
+        //     console.log('a draw')
+        // } else {
+        //     winner = null
+        //     console.log('no winner')
         }
-        return winner
     }
+    return winner
 }
 
 
@@ -182,6 +204,3 @@ function resetGame() {
         players[0].isTurn = true
     }
 }
-
-
-
