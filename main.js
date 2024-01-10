@@ -83,7 +83,7 @@ function loadGame() {
 // Increase Wins
 // if checkBoard() is playerOne, players[0].wins ++
 // if checkBoard() is playerTwo, players[1].wins ++
-// if !checkBoard(), do nothing
+// if !checkBoard() (a draw), reset game
 function increaseWins() {
     // console.log('increase wins winner:', checkBoard())
     if (checkBoard() === 'playerOne') {
@@ -96,6 +96,9 @@ function increaseWins() {
         players[1].wins ++
         console.log('win for player two')
         console.log(players[1].wins)
+        resetGame()
+    } else if (checkBoard() === null) {
+        console.log('twas a draw')
         resetGame()
     }
     displayWins()
@@ -178,9 +181,9 @@ function checkBoard() {
         } else if (gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i])) {
             winner = 'playerTwo'
             console.log('player two wins')
-        // } else if (turns === 9) {
-        //     winner = null
-        //     console.log('a draw')
+        } else if (turns === 9) {
+            winner = null
+            console.log('a draw')
         // } else {
         //     winner = null
         //     console.log('no winner')
@@ -209,6 +212,8 @@ function resetGame() {
         players[0].isTurn = true
         players[1].isTurn = false
     }
+    // restart turns counter
+    turns = 0
 console.log('starting next game', startedGame)
 console.log('should be false', players[0].isTurn)
 console.log(gameBoardMoves)
