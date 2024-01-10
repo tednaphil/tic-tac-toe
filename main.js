@@ -199,7 +199,7 @@ function checkBoard() {
         } else if (gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i])) {
             winner = 'playerTwo'
             console.log('player two wins')
-        } else if (turns === 9) {
+        } else if (turns === 9 && winner === '') {
             winner = null
             console.log('a draw')
         }
