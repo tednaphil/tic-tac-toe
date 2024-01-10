@@ -39,13 +39,13 @@ body {
     display: grid;
     grid-template-columns: auto auto auto;
     height: 45%;
-    width: 95%
+    width: 95%;
 }
 
 .grid-item {
     border: 3px solid;
     padding: 40px;
-    font-size: 65px;
+    font-size: xxx-large;
     text-align: center;
     color: black;
 }
