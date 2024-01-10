@@ -29,7 +29,7 @@ addEventListener('load', loadGame);
 gameBoard.addEventListener('click',function(event) {
     if(event.target.classList.contains('grid-item')) {
         updateGameboard(event)
-        // switchTurns()
+        switchTurns()
         checkBoard()
      }
 })
@@ -106,12 +106,19 @@ function updateGameboard(e) {
 
 // Keep track of which player's turn it is:
 function switchTurns() {
-    // turns ++
+    turns ++
+    if (players[0].isTurn) {
+        players[1].isTurn = true;
+        players[0].isTurn = false;
+        console.log(`it's player two's turn next`)
+    } else {
+        players[0].isTurn = true;
+        players[1].isTurn = false;
+        console.log(`it's player one's turn next`)
+    }
     //check the player object to see if it's their turn
     //if it is the players turn, reassign isTurn to false
     //and assign the other players turn to true
-    
-    
 }
 
 // Check board for win conditions & check board for a draw:
