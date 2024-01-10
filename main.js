@@ -32,6 +32,7 @@ gameBoard.addEventListener('click',function(event) {
         switchTurns()
         checkBoard()
         increaseWins()
+        makeAnnouncement()
      }
 })
 
@@ -78,12 +79,10 @@ function loadGame() {
     createPlayer();
     displayWins();
     clearBoard();
+    makeAnnouncement();
 }
 
-// Increase Wins
-// if checkBoard() is playerOne, players[0].wins ++
-// if checkBoard() is playerTwo, players[1].wins ++
-// if !checkBoard() (a draw), reset game
+// Increase Wins:
 function increaseWins() {
     // console.log('increase wins winner:', checkBoard())
     if (checkBoard() === 'playerOne') {
@@ -108,6 +107,7 @@ function increaseWins() {
 function updateGameboard(e) {
     // console.log(`updateGameboard`)
     // console.log(e.srcElement.attributes[1].nodeValue)
+    // only allow a boardSpace to be added once
     if (players[0].isTurn) {
         gameBoardMoves.playerOneMoves.push(e.srcElement.attributes[1].nodeValue)
     }
@@ -123,11 +123,18 @@ function updateGameboard(e) {
 
 // }
 
-// function makeAnnouncement() {
+function makeAnnouncement() {
 // update the announcement element's innerText to display whose turn it is
 // if someone has won, announce the winner, then timeout and display whose turn it is
-// if there is draw, announce there's a draw, then timeout and display whose turn it is
-// }
+// if there is draw, announce there's a draw, then timeout and display whose turn it is  
+    if (players[0].isTurn) {
+        announcement.innerText = `It's ${players[0].token}'s turn`
+    }
+    if (players[1].isTurn) {
+        announcement.innerText = `It's ${players[1].token}'s turn`
+    }   
+}
+
 
 // Keep track of which player's turn it is:
 function switchTurns() {
@@ -141,21 +148,10 @@ function switchTurns() {
         players[1].isTurn = false;
         console.log(`it's player one's turn next`)
     }
-    //check the player object to see if it's their turn
-    //if it is the players turn, reassign isTurn to false
-    //and assign the other players turn to true
 }
 
 // Check board for win conditions & check board for a draw:
 function checkBoard() {
-// declare winner variable
-// look through gameBoardMoves[0] and [1]
-// if gameboardMoves[0] includes a winning condition, player one assigned to winner
-// if gameboardMoves[1] includes a winning condition, player two to winner
-// if turns = 9 and neither array includes a winning condition, determine a draw
-// and winner assigned to null
-// return winner
-    // console.log('checkBoard')
     var winningConditions = [
         [0, 1, 2],
         [3, 4, 5],
@@ -184,9 +180,6 @@ function checkBoard() {
         } else if (turns === 9) {
             winner = null
             console.log('a draw')
-        // } else {
-        //     winner = null
-        //     console.log('no winner')
         }
     }
     return winner
@@ -195,12 +188,10 @@ function checkBoard() {
 
 // Reset gameboard and start new game:
 function resetGame() {
-// reset gameBoardMoves
     gameBoardMoves = {
         playerOneMoves: [],
         playerTwoMoves: []
     };
-    // switch game starter
     console.log('started this game', startedGame)
     if (startedGame === 'playerOne') {
         startedGame = 'playerTwo'
@@ -211,10 +202,8 @@ function resetGame() {
         startedGame = 'playerOne'
         players[0].isTurn = true
         players[1].isTurn = false
-    }
-    // restart turns counter
-    turns = 0
+    };
+    turns = 0;
 console.log('starting next game', startedGame)
-console.log('should be false', players[0].isTurn)
 console.log(gameBoardMoves)
 }
