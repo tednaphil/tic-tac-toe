@@ -217,6 +217,7 @@ function resetGame() {
         players[1].isTurn = false
     };
     turns = 0;
+    clearBoard();
 console.log('starting next game', startedGame)
 console.log(gameBoardMoves)
 }
