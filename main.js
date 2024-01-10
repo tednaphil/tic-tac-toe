@@ -33,7 +33,7 @@ gameBoard.addEventListener('click',function(event) {
         switchTurns()
         checkBoard()
         increaseWins()
-        makeAnnouncement()
+        announceTurn()
      }
 })
 
@@ -80,7 +80,7 @@ function loadGame() {
     createPlayer();
     displayWins();
     clearBoard();
-    makeAnnouncement();
+    announceTurn();
 }
 
 // Increase Wins:
@@ -90,15 +90,18 @@ function increaseWins() {
         players[0].wins ++
         console.log('win for player one')
         console.log(players[0].wins)
+        // announceWinner(players[0])
         resetGame()
     }
     if (checkBoard() === 'playerTwo') {
         players[1].wins ++
         console.log('win for player two')
         console.log(players[1].wins)
+        // announceWinner(players[1])
         resetGame()
     } else if (checkBoard() === null) {
         console.log('twas a draw')
+        // announceWinner()
         resetGame()
     }
     displayWins()
@@ -136,7 +139,7 @@ function displayMoves() {
     }
 }
 
-function makeAnnouncement() {
+function announceTurn() {
 // update the announcement element's innerText to display whose turn it is
 // if someone has won, announce the winner, then timeout and display whose turn it is
 // if there is draw, announce there's a draw, then timeout and display whose turn it is  
@@ -148,6 +151,17 @@ function makeAnnouncement() {
     }   
 }
 
+// function announceWinner(playerObject) {
+//     console.log(`announceWinner`)
+//     console.log(playerObject.token)
+//     if (checkBoard()) {
+//         announcement.innerText = `${playerObject.token} won the honey!`
+//         console.log('winner announcement')
+//     } else {
+//         announcement.innerText = `It's a draw!`
+//         console.log('draw announcement')
+//     }
+// }
 
 // Keep track of which player's turn it is:
 function switchTurns() {
