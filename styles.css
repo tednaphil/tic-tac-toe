@@ -43,6 +43,7 @@ body {
 }
 
 .grid-item {
+    background-color: #faf7de;
     border: 3px solid;
     padding: 40px;
     font-size: xxx-large;

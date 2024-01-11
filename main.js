@@ -287,3 +287,7 @@ function resetGame() {
 console.log('starting next game', startedGame)
 console.log(gameBoardMoves)
 }
+
+function disableBoard() {
+    
+}
