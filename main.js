@@ -30,7 +30,6 @@ gameBoard.addEventListener('click',function(event) {
     if(event.target.classList.contains('grid-item')) {
         updateGameboard(event)
         displayMoves()
-        switchTurns()
         announceTurn()
         checkBoard()
         increaseWins()
@@ -94,10 +93,12 @@ function updateGameboard(e) {
     if (players[0].isTurn && !gameBoardMoves.allMoves.includes(space)) {
         gameBoardMoves.playerOneMoves.push(space)
         gameBoardMoves.allMoves.push(space)
+        switchTurns()
     }
     if (players[1].isTurn && !gameBoardMoves.allMoves.includes(space)) {
         gameBoardMoves.playerTwoMoves.push(space)
         gameBoardMoves.allMoves.push(space)
+        switchTurns()
     }
     gameBoardMoves.playerOneMoves.sort()
     gameBoardMoves.playerTwoMoves.sort()
