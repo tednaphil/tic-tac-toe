@@ -19,7 +19,8 @@ var boardSpaces = {
 var players = [];
 var gameBoardMoves = {
     playerOneMoves: [],
-    playerTwoMoves: []
+    playerTwoMoves: [],
+    allMoves: []
 };
 var startedGame = 'playerOne'
 var turns = 0
@@ -109,17 +110,20 @@ function updateGameboard(e) {
     // console.log(`updateGameboard`)
     // console.log(e.srcElement.attributes[1].nodeValue)
     var space = e.srcElement.attributes[1].nodeValue
-    if (players[0].isTurn && !gameBoardMoves.playerOneMoves.includes(space)) {
+    if (players[0].isTurn && !gameBoardMoves.allMoves.includes(space)) {
         gameBoardMoves.playerOneMoves.push(space);
+        gameBoardMoves.allMoves.push(space)
         // switchTurns();
     }
-    if (players[1].isTurn && !gameBoardMoves.playerTwoMoves.includes(space)) {
+    if (players[1].isTurn && !gameBoardMoves.allMoves.includes(space)) {
         gameBoardMoves.playerTwoMoves.push(space);
+        gameBoardMoves.allMoves.push(space)
         // switchTurns();
     }
     gameBoardMoves.playerOneMoves.sort()
     gameBoardMoves.playerTwoMoves.sort()
     console.log(`player two sorted moves`, gameBoardMoves.playerTwoMoves)
+    console.log('all moves', gameBoardMoves.allMoves)
     // console.log('gameboardMoves', gameBoardMoves)
 }
 
@@ -199,7 +203,7 @@ function checkBoard() {
         } else if (gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i])) {
             winner = 'playerTwo'
             console.log('player two wins')
-        } else if (turns === 9 && winner === '') {
+        } else if (gameBoardMoves.allMoves.length === 9 && winner === '') {
             winner = null
             console.log('a draw')
         }
@@ -212,7 +216,8 @@ function checkBoard() {
 function resetGame() {
     gameBoardMoves = {
         playerOneMoves: [],
-        playerTwoMoves: []
+        playerTwoMoves: [],
+        allMoves: []
     };
     console.log('started this game', startedGame)
     if (startedGame === 'playerOne') {
