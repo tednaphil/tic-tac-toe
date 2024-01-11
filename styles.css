@@ -1,28 +1,22 @@
-/* GENERAL */
 body {
     background: linear-gradient(#faf7de, #d0ed3b);
     font-family: 'Courier New', Courier, monospace ;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-}
-
-.text {
     text-align: center;
 }
 
-/* PLAYER DISPLAYS */
 .player-display {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.player-icons {
+.player-icons,
+.grid-item {
     font-size: xxx-large;
 }
-
-/* GAME DISPLAY */
 
 .game-display {
     background-color: #faf7de;
@@ -30,7 +24,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
     justify-content: space-evenly;
 
 }
@@ -46,9 +39,6 @@ body {
     background-color: #faf7de;
     border: 3px solid;
     padding: 40px;
-    font-size: xxx-large;
-    text-align: center;
-    color: black;
 }
 
 #position-0 {
