@@ -122,8 +122,8 @@ function updateGameboard(e) {
     }
     gameBoardMoves.playerOneMoves.sort()
     gameBoardMoves.playerTwoMoves.sort()
-    console.log(`player two sorted moves`, gameBoardMoves.playerTwoMoves)
-    console.log('all moves', gameBoardMoves.allMoves)
+    // console.log(`player two sorted moves`, gameBoardMoves.playerTwoMoves)
+    // console.log('all moves', gameBoardMoves.allMoves)
     // console.log('gameboardMoves', gameBoardMoves)
 }
 
@@ -133,11 +133,11 @@ function displayMoves() {
     var playerTwoMoves = gameBoardMoves.playerTwoMoves;
     for (var i = 0; i < playerOneMoves.length; i++) {
         boardSpaces[playerOneMoves[i]].innerText = `${players[0].token}`
-        console.log(boardSpaces[playerOneMoves[i]])
+        // console.log(boardSpaces[playerOneMoves[i]])
     }
     for (var i = 0; i < playerTwoMoves.length; i++) {
         boardSpaces[playerTwoMoves[i]].innerText = `${players[1].token}`
-        console.log(boardSpaces[playerTwoMoves[i]])
+        // console.log(boardSpaces[playerTwoMoves[i]])
     }
 }
 
@@ -152,7 +152,6 @@ function announceTurn() {
 
 function announceWinner(playerObject) {
     console.log(`announceWinner`)
-    console.log(playerObject.token)
     if (checkBoard()) {
         announcement.innerText = `${playerObject.token} won the honey!`
         console.log('winner announcement')
@@ -186,9 +185,35 @@ function checkBoard() {
         [1, 4, 7],
         [2, 5, 8],
         [0, 4, 8],
-        [2, 4, 6]
+        [2, 4, 6],
     ];
+
+    var winningConditionRegExps = [
+        /[012]/,
+        /[345]/,
+        /[678]/,
+        /[036]/,
+        /[147]/,
+        /[258]/,
+        /[048]/,
+        /[246]/
+    ]
     var winner = ''
+    var testString = '2, 4, 5, 6'
+    console.log('playerTwoMoves', gameBoardMoves.playerTwoMoves.toString())
+    console.log('playerOneMoves', gameBoardMoves.playerOneMoves)
+    console.log(gameBoardMoves.playerOneMoves.toString())
+    console.log('all moves', gameBoardMoves.allMoves)
+    console.log(winningConditions[7])
+    console.log('regex test', /[246]/.test(testString))
+    console.log('regexps array test', winningConditionRegExps[7].test(testString))
+    console.log(gameBoardMoves.playerOneMoves.toString().includes((winningConditions[0]).toString()))
+    console.log(winningConditions[0] in gameBoardMoves.playerOneMoves)
+    // console.log(['2', '4', '5', '6'].includes(winningConditions[7]))
+    // console.log(['2', '4', '5', '6'].toString().includes(winningConditions[7]))
+    // console.log(winningConditions[7])
+    // console.log(['2', '4', '5', '6'].toString())
+    // console.log([2, 4, 5, 6].includes(winningConditions[7]))
     for (var i = 0; i < winningConditions.length; i++) {
         // console.log('checkBoard for loop')
         // console.log('gameboard moves player One', gameBoardMoves.playerOneMoves.toString())
@@ -197,16 +222,22 @@ function checkBoard() {
         // console.log(gameBoardMoves.playerOneMoves.includes(winningConditions[i]))
         // console.log(winningConditions[3])
         // console.log('player one moves', gameBoardMoves.playerOneMoves.toString())
-        if (gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i])) {
-            winner = 'playerOne'
-            console.log('player one wins')
-        } else if (gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i])) {
-            winner = 'playerTwo'
-            console.log('player two wins')
-        } else if (gameBoardMoves.allMoves.length === 9 && winner === '') {
-            winner = null
-            console.log('a draw')
+        // console.log(gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i]))
+        
+        if (winningConditionRegExps[i].test(gameBoardMoves.playerOneMoves.toString())) {
+            console.log('the regex test worked')
         }
+
+        // if (gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i])) {
+        //     winner = 'playerOne'
+        //     console.log('player one wins')
+        // } else if (gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i])) {
+        //     winner = 'playerTwo'
+        //     console.log('player two wins')
+        // } else if (gameBoardMoves.allMoves.length === 9 && winner === '') {
+        //     winner = null
+        //     console.log('a draw')
+        // }
     }
     return winner
 }
