@@ -23,6 +23,7 @@ var gameBoardMoves = {
     allMoves: []
 };
 var startedGame = 'playerOne'
+var winner = ''
 
 // EVENT LISTENERS
 addEventListener('load', loadGame);
@@ -32,7 +33,7 @@ gameBoard.addEventListener('click',function(event) {
         displayMoves()
         announceTurn()
         checkBoard()
-        increaseWins()
+        increaseWins(winner)
      }
 });
 
@@ -115,17 +116,17 @@ function checkBoard() {
         [0, 4, 8],
         [2, 4, 6],
     ]
-    var winner = ''
+    // var winner = ''
     for (var i = 0; i < winningConditions.length; i++) {
         if (gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i][0])
             && gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i][1])
             && gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i][2])) {
-                winner = 'playerOne'
+                winner = players[0]
         }
         else if (gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i][0])
                 && gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i][1])
                 && gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i][2])) {
-                    winner = 'playerTwo'
+                    winner = players[1]
         }
         else if (gameBoardMoves.allMoves.length === 9 && winner === '') {
             winner = null
@@ -142,16 +143,10 @@ function announceWinner(playerObject) {
     }
 };
 
-function increaseWins() {
-    if (checkBoard() === 'playerOne') {
-        players[0].wins ++
-        announceWinner(players[0])
-        disableBoard()
-        setTimeout(resetGame, 2500)
-    }
-    if (checkBoard() === 'playerTwo') {
-        players[1].wins ++
-        announceWinner(players[1])
+function increaseWins(winner) {
+    if (checkBoard()) {
+        winner.wins ++
+        announceWinner(winner)
         disableBoard()
         setTimeout(resetGame, 2500)
     } else if (checkBoard() === null) {
