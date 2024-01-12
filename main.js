@@ -4,15 +4,15 @@ var playerTwoWins = document.querySelector('#player-two-wins');
 var announcement = document.querySelector('#announcement')
 var gameBoard = document.querySelector('.game-board');
 var boardSpaces = {
-    0: document.querySelector('#position-0'),
-    1: document.querySelector('#position-1'),
-    2: document.querySelector('#position-2'),
-    3: document.querySelector('#position-3'),
-    4: document.querySelector('#position-4'),
-    5: document.querySelector('#position-5'),
-    6: document.querySelector('#position-6'),
-    7: document.querySelector('#position-7'),
-    8: document.querySelector('#position-8')
+    0: document.querySelector('#position0'),
+    1: document.querySelector('#position1'),
+    2: document.querySelector('#position2'),
+    3: document.querySelector('#position3'),
+    4: document.querySelector('#position4'),
+    5: document.querySelector('#position5'),
+    6: document.querySelector('#position6'),
+    7: document.querySelector('#position7'),
+    8: document.querySelector('#position8')
 };
 
 // GLOBAL VARIABLES
