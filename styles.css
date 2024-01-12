@@ -36,43 +36,36 @@ body {
 }
 
 .grid-item {
-    background-color: #faf7de;
+    background-color: transparent;
     border: 3px solid;
     padding: 40px;
 }
 
-#position-0 {
-    border-top: transparent;
-    border-left: transparent;
+.grid-item:hover {
+    cursor:pointer
 }
 
-#position-1 {
+#position0,
+#position1,
+#position2 {
     border-top: transparent;
+
 }
 
-#position-2 {
-    border-top: transparent;
+#position2,
+#position5,
+#position8 {
     border-right: transparent;
 }
 
-#position-3 {
-    border-left: transparent;
-}
-
-#position-5 {
-    border-right: transparent;
-}
-
-#position-6 {
-    border-left: transparent;
+#position6,
+#position7,
+#position8 {
     border-bottom: transparent;
 }
 
-#position-7 {
-    border-bottom: transparent;
-}
-
-#position-8 {
-    border-bottom: transparent;
-    border-right: transparent;
+#position0,
+#position3,
+#position6 {
+    border-left: transparent
 }

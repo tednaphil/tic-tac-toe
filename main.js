@@ -4,15 +4,15 @@ var playerTwoWins = document.querySelector('#player-two-wins');
 var announcement = document.querySelector('#announcement')
 var gameBoard = document.querySelector('.game-board');
 var boardSpaces = {
-    0: document.querySelector('#position-0'),
-    1: document.querySelector('#position-1'),
-    2: document.querySelector('#position-2'),
-    3: document.querySelector('#position-3'),
-    4: document.querySelector('#position-4'),
-    5: document.querySelector('#position-5'),
-    6: document.querySelector('#position-6'),
-    7: document.querySelector('#position-7'),
-    8: document.querySelector('#position-8')
+    0: document.querySelector('#position0'),
+    1: document.querySelector('#position1'),
+    2: document.querySelector('#position2'),
+    3: document.querySelector('#position3'),
+    4: document.querySelector('#position4'),
+    5: document.querySelector('#position5'),
+    6: document.querySelector('#position6'),
+    7: document.querySelector('#position7'),
+    8: document.querySelector('#position8')
 };
 
 // GLOBAL VARIABLES
@@ -22,7 +22,8 @@ var gameBoardMoves = {
     playerTwoMoves: [],
     allMoves: []
 };
-var startedGame = 'playerOne'
+// var startedGame = 'playerOne'
+var winner = ''
 
 // EVENT LISTENERS
 addEventListener('load', loadGame);
@@ -32,7 +33,7 @@ gameBoard.addEventListener('click',function(event) {
         displayMoves()
         announceTurn()
         checkBoard()
-        increaseWins()
+        increaseWins(winner)
      }
 });
 
@@ -42,12 +43,14 @@ function createPlayer() {
         id: 1,
         token: '🐝',
         isTurn: true,
+        startGame: true,
         wins: 0
     }
     var playerTwo = {
         id: 2,
         token: '🐻',
         isTurn: false,
+        startGame: false,
         wins: 0
     }
     players.push(playerOne, playerTwo)
@@ -115,17 +118,16 @@ function checkBoard() {
         [0, 4, 8],
         [2, 4, 6],
     ]
-    var winner = ''
     for (var i = 0; i < winningConditions.length; i++) {
         if (gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i][0])
             && gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i][1])
             && gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i][2])) {
-                winner = 'playerOne'
+                winner = players[0]
         }
         else if (gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i][0])
                 && gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i][1])
                 && gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i][2])) {
-                    winner = 'playerTwo'
+                    winner = players[1]
         }
         else if (gameBoardMoves.allMoves.length === 9 && winner === '') {
             winner = null
@@ -142,16 +144,10 @@ function announceWinner(playerObject) {
     }
 };
 
-function increaseWins() {
-    if (checkBoard() === 'playerOne') {
-        players[0].wins ++
-        announceWinner(players[0])
-        disableBoard()
-        setTimeout(resetGame, 2500)
-    }
-    if (checkBoard() === 'playerTwo') {
-        players[1].wins ++
-        announceWinner(players[1])
+function increaseWins(winner) {
+    if (checkBoard()) {
+        winner.wins ++
+        announceWinner(winner)
         disableBoard()
         setTimeout(resetGame, 2500)
     } else if (checkBoard() === null) {
@@ -186,16 +182,14 @@ function resetGame() {
         playerTwoMoves: [],
         allMoves: []
     }
-    if (startedGame === 'playerOne') {
-        startedGame = 'playerTwo'
-        players[1].isTurn = true
-        players[0].isTurn = false
+    for (var i = 0; i < players.length; i++)
+        if (!players[i].startGame) {
+            players[i].startGame = true
+            players[i].isTurn = players[i].startGame ? true : false
+        } else if (players[i].startGame) {
+            players[i].startGame = false
         }
-    else if (startedGame === 'playerTwo') {
-        startedGame = 'playerOne'
-        players[0].isTurn = true
-        players[1].isTurn = false
-    }
+    winner = ''
     clearBoard()
     enableBoard()
     announceTurn()
