@@ -43,14 +43,14 @@ function createPlayer() {
         id: 1,
         token: '🐝',
         isTurn: true,
-        startedGame: true,
+        startGame: true,
         wins: 0
     }
     var playerTwo = {
         id: 2,
         token: '🐻',
         isTurn: false,
-        startedGame: false,
+        startGame: false,
         wins: 0
     }
     players.push(playerOne, playerTwo)
@@ -182,35 +182,13 @@ function resetGame() {
         playerTwoMoves: [],
         allMoves: []
     }
-
-    // if (players[i].startedGame) {
-    //         players[i].isTurn = false
-    //         players[i].startedGame = false
-    //         // players[i].isTurn = !players[i].isTurn
-    //     } else {
-    //         players[i].startedGame = !players[i].startedGame
-    //         players[i].isTurn = true
-    //     }
-
-    console.log('players pre-loop', players)
     for (var i = 0; i < players.length; i++)
-    if (!players[i].startedGame) {
-        players[i].startedGame = true
-        players[i].isTurn = players[i].startedGame ? true : false
-    } else if (players[i].startedGame) {
-        players[i].startedGame = false
-    }
-
-    // if (startedGame === 'playerOne') {
-    //     startedGame = 'playerTwo'
-    //     players[1].isTurn = true
-    //     players[0].isTurn = false
-    //     }
-    // else if (startedGame === 'playerTwo') {
-    //     startedGame = 'playerOne'
-    //     players[0].isTurn = true
-    //     players[1].isTurn = false
-    // }
+        if (!players[i].startGame) {
+            players[i].startGame = true
+            players[i].isTurn = players[i].startGame ? true : false
+        } else if (players[i].startGame) {
+            players[i].startGame = false
+        }
     winner = ''
     clearBoard()
     enableBoard()
