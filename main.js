@@ -182,12 +182,25 @@ function resetGame() {
         playerTwoMoves: [],
         allMoves: []
     }
+
+    // if (players[i].startedGame) {
+    //         players[i].isTurn = false
+    //         players[i].startedGame = false
+    //         // players[i].isTurn = !players[i].isTurn
+    //     } else {
+    //         players[i].startedGame = !players[i].startedGame
+    //         players[i].isTurn = true
+    //     }
+
     console.log('players pre-loop', players)
     for (var i = 0; i < players.length; i++)
-        if (players[i].startedGame) {
-            players[i].startedGame = !players[i].startedGame
-            players[i].isTurn = false
-        }
+    if (!players[i].startedGame) {
+        players[i].startedGame = true
+        players[i].isTurn = players[i].startedGame ? true : false
+    } else if (players[i].startedGame) {
+        players[i].startedGame = false
+    }
+
     // if (startedGame === 'playerOne') {
     //     startedGame = 'playerTwo'
     //     players[1].isTurn = true
