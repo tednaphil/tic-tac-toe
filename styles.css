@@ -41,6 +41,10 @@ body {
     padding: 40px;
 }
 
+.grid-item:hover {
+    cursor:pointer
+}
+
 #position-0 {
     border-top: transparent;
     border-left: transparent;
