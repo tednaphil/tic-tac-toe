@@ -116,7 +116,6 @@ function checkBoard() {
         [0, 4, 8],
         [2, 4, 6],
     ]
-    // var winner = ''
     for (var i = 0; i < winningConditions.length; i++) {
         if (gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i][0])
             && gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i][1])
@@ -191,6 +190,7 @@ function resetGame() {
         players[0].isTurn = true
         players[1].isTurn = false
     }
+    winner = ''
     clearBoard()
     enableBoard()
     announceTurn()
