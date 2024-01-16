@@ -40,14 +40,14 @@ gameBoard.addEventListener('click',function(event) {
 // FUNCTIONS
 function createPlayer() {
     var playerOne = {
-        id: 1,
+        id: 'One',
         token: '🐝',
         isTurn: true,
         startGame: true,
         wins: 0
     }
     var playerTwo = {
-        id: 2,
+        id: 'Two',
         token: '🐻',
         isTurn: false,
         startGame: false,
@@ -83,12 +83,11 @@ function displayMoves() {
 };
 
 function announceTurn() {
-    if (players[0].isTurn) {
-        announcement.innerText = `It's ${players[0].token}'s turn`
+    for (var i = 0; i < players.length; i++) {
+        if (players[i].isTurn) {
+            announcement.innerText = `It's ${players[i].token}'s turn`
+        }
     }
-    if (players[1].isTurn) {
-        announcement.innerText = `It's ${players[1].token}'s turn`
-    }   
 };
 
 function updateGameboard(e) {
