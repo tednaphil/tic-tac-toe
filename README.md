@@ -11,9 +11,10 @@ This is a two-player tic-tac-toe game! Find a friend and try to win the honeyüç
 - [Repo link](https://github.com/tednaphil/tic-tac-toe)
 - Use the green code button on the repo site to access and copy the SSH link
 - Run `git clone` on your terminal command line followed by the pasted SSH link
+- `cd` into the cloned directory
 - Open your preferred text editor to view HTML, JS, & CSS files
 - Run `open index.html` on the command line to open the application in the browser
-<!--- OR access the deployed site here --->
+- OR access the deployed site [here](https://tednaphil.github.io/tic-tac-toe/)
 ## Preview
 ![Recorded_screen_1_V1 (1)](https://github.com/tednaphil/tic-tac-toe/assets/76406423/5d90b21f-9f4a-4212-8166-0a309a299e90)
 ## Context
