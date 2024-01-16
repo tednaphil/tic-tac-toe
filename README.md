@@ -29,4 +29,4 @@ This is a two-player tic-tac-toe game! Find a friend and try to win the honeyüç
 ### Wins & Challenges
 - Win: succesful use of ternary operator and event targets' nodeValues
 - Challenge 1: comparing and evaluating players' moves for winning conditions that did not match the win condition's exact sequence
-- Challenge 2: updating players' game-starting turns dynamically
+- Challenge 2: Gameboard grid sizing with CSS
