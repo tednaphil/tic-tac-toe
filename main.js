@@ -17,12 +17,7 @@ var boardSpaces = {
 
 // GLOBAL VARIABLES
 var players = [];
-var gameBoardMoves = {
-    playerOneMoves: [],
-    playerTwoMoves: [],
-    allMoves: []
-};
-// var startedGame = 'playerOne'
+var allMoves = [];
 var winner = ''
 
 // EVENT LISTENERS
@@ -44,6 +39,7 @@ function createPlayer() {
         token: '🐝',
         isTurn: true,
         startGame: true,
+        moves: [],
         wins: 0
     }
     var playerTwo = {
@@ -51,6 +47,7 @@ function createPlayer() {
         token: '🐻',
         isTurn: false,
         startGame: false,
+        moves: [],
         wins: 0
     }
     players.push(playerOne, playerTwo)
@@ -72,8 +69,8 @@ function displayWins() {
 };
 
 function displayMoves() {
-    var playerOneMoves = gameBoardMoves.playerOneMoves
-    var playerTwoMoves = gameBoardMoves.playerTwoMoves
+    var playerOneMoves = players[0].moves
+    var playerTwoMoves = players[1].moves
     for (var i = 0; i < playerOneMoves.length; i++) {
         boardSpaces[playerOneMoves[i]].innerText = `${players[0].token}`
     }
@@ -92,18 +89,15 @@ function announceTurn() {
 
 function updateGameboard(e) {
     var space = e.srcElement.attributes[1].nodeValue
-    if (players[0].isTurn && !gameBoardMoves.allMoves.includes(space)) {
-        gameBoardMoves.playerOneMoves.push(space)
-        gameBoardMoves.allMoves.push(space)
-        switchTurns()
+    for (var i = 0; i < players.length; i++) {
+        if (players[i].isTurn && !allMoves.includes(space)) {
+            allMoves.push(space)
+            allMoves.sort()
+            players[i].moves.push(space)
+            players[i].moves.sort()
+            switchTurns()
+        }
     }
-    if (players[1].isTurn && !gameBoardMoves.allMoves.includes(space)) {
-        gameBoardMoves.playerTwoMoves.push(space)
-        gameBoardMoves.allMoves.push(space)
-        switchTurns()
-    }
-    gameBoardMoves.playerOneMoves.sort()
-    gameBoardMoves.playerTwoMoves.sort()
 };
 
 function checkBoard() {
@@ -118,17 +112,17 @@ function checkBoard() {
         [2, 4, 6],
     ]
     for (var i = 0; i < winningConditions.length; i++) {
-        if (gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i][0])
-            && gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i][1])
-            && gameBoardMoves.playerOneMoves.toString().includes(winningConditions[i][2])) {
+        if (players[0].moves.toString().includes(winningConditions[i][0])
+            && players[0].moves.toString().includes(winningConditions[i][1])
+            && players[0].moves.toString().includes(winningConditions[i][2])) {
                 winner = players[0]
         }
-        else if (gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i][0])
-                && gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i][1])
-                && gameBoardMoves.playerTwoMoves.toString().includes(winningConditions[i][2])) {
+        else if (players[1].moves.toString().includes(winningConditions[i][0])
+                && players[1].moves.toString().includes(winningConditions[i][1])
+                && players[1].moves.toString().includes(winningConditions[i][2])) {
                     winner = players[1]
         }
-        else if (gameBoardMoves.allMoves.length === 9 && winner === '') {
+        else if (allMoves.length === 9 && winner === '') {
             winner = null
         }
     }
@@ -176,11 +170,9 @@ function enableBoard() {
 };
 
 function resetGame() {
-    gameBoardMoves = {
-        playerOneMoves: [],
-        playerTwoMoves: [],
-        allMoves: []
-    }
+    allMoves = []
+    players[0].moves = []
+    players[1].moves = []
     for (var i = 0; i < players.length; i++)
         if (!players[i].startGame) {
             players[i].startGame = true
