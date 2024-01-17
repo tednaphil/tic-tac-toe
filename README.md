@@ -20,7 +20,7 @@ This is a two-player tic-tac-toe game! Find a friend and try to win the honeyüç
 ## Context
 - The comp build, functionality, and initial bug fixes took about 10 hours of work time
 - Refactoring to reduce redundancies and improve semantic tag use took 3-4 additional hours of work time
-- This solo project was completed in the 5th week of Mod 1 of the Turing Front End Engineering program
+- This solo project was completed in the 5th week of learning JavaScript, HTML, and CSS in the Turing Front End Engineering program
 ### Learning Goals
 - Demonstrate understanding of DRY JavaScript and event delegation
 - Understand the difference between the data model and how data is displayed on the DOM
